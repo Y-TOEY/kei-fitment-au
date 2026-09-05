@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coming soon — KEIFIT</title>
+  <link rel="stylesheet" href="../css/home.css" />
+  <style>
+    .soon {
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .soon h1 {
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+    }
+    .soon p { color: var(--steel); max-width: 28rem; margin: 0.75rem auto 1.5rem; }
+    .soon a {
+      display: inline-block;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--orange);
+      color: var(--ink);
+      padding: 0.85rem 1.2rem;
+      border-radius: 3px;
+      border-bottom: 3px solid var(--orange-dim);
+    }
+  </style>
+</head>
+<body class="home">
+  <main class="soon">
+    <div>
+      <p class="hero__kicker" id="section-label">SECTION</p>
+      <h1>Coming soon</h1>
+      <p>This catalogue area is reserved. Fitment data stays evidence-gated — we will not invent claims to fill the shelf.</p>
+      <a href="../filters.html">Open Fitment Finder</a>
+      <p style="margin-top:1rem"><a href="../index.html" style="color:var(--steel);font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;text-decoration:none">← Home</a></p>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var section = (params.get("section") || "section").replace(/-/g, " ");
+      var el = document.getElementById("section-label");
+      if (el) el.textContent = section.toUpperCase();
+      document.title = section.charAt(0).toUpperCase() + section.slice(1) + " — Coming soon · KEIFIT";
+    })();
+  </script>
+</body>
+</html>
