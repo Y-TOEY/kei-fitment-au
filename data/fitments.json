@@ -1,18 +1,22 @@
 {
   "vehicle": {
     "make": "Suzuki",
-    "model": "Carry",
+    "model": "Carry / Super Carry",
     "platform": "DA16T",
     "market": "AU"
   },
   "schemaNotes": {
-    "hubBore": "Always null until measured. hubBoreStatus must remain unknown/unresolved. Issue #1 hub HOLD must not invent a value.",
+    "hubBore": "Always null until measured. hubBoreStatus must remain unknown/unresolved. Do not invent 54/54.1 until Jerome Confirms.",
     "evidenceConfidence": ["Confirmed", "Reported", "Manufacturer specification", "Unverified"],
-    "scaffold": "Placeholder rows below are schema examples only — not real verified fitments."
+    "publicResults": "Only fitments[] rows that pass isPublicFitment() appear in filters/results. scaffoldExamples are never loaded into the public finder.",
+    "scaffold": "scaffoldExamples are schema/UI fixtures only — not gated fitments."
   },
-  "fitments": [
+  "fitments": [],
+  "scaffoldExamples": [
     {
       "id": "scaffold-001",
+      "scaffold": true,
+      "visibility": "scaffold",
       "suspension": "stock",
       "wheelDiameterIn": 14,
       "wheelWidthIn": 5.5,
@@ -23,10 +27,12 @@
       "hubBoreMm": null,
       "hubBoreStatus": "unknown",
       "evidenceConfidence": "Unverified",
-      "notes": "SCAFFOLD example only — replace after Fitment Lab verification. Offset intentionally unset."
+      "notes": "SCAFFOLD only — not shown in public results."
     },
     {
       "id": "scaffold-002",
+      "scaffold": true,
+      "visibility": "scaffold",
       "suspension": "lifted",
       "wheelDiameterIn": 15,
       "wheelWidthIn": 6.0,
@@ -37,10 +43,12 @@
       "hubBoreMm": null,
       "hubBoreStatus": "unknown",
       "evidenceConfidence": "Unverified",
-      "notes": "SCAFFOLD example only — not confirmed. Hub/centre bore unresolved (issue #1 HOLD)."
+      "notes": "SCAFFOLD only — hub unresolved (issue #1 HOLD)."
     },
     {
       "id": "scaffold-003",
+      "scaffold": true,
+      "visibility": "scaffold",
       "suspension": "stock",
       "wheelDiameterIn": 13,
       "wheelWidthIn": 5.0,
@@ -51,7 +59,7 @@
       "hubBoreMm": null,
       "hubBoreStatus": "unknown",
       "evidenceConfidence": "Unverified",
-      "notes": "SCAFFOLD example only — filter demo row pending real evidence."
+      "notes": "SCAFFOLD only — filter demo fixture."
     }
   ]
 }
