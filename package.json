@@ -1,0 +1,7 @@
+{
+  "name": "keifit-au-da16t-mvp",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/fitment-lib.test.js"
+  }
+}

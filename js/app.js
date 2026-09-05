@@ -1,5 +1,6 @@
 (function () {
   const DATA_URL = "./data/fitments.json";
+  const lib = window.KeiFitLib;
 
   const els = {
     suspension: document.getElementById("filter-suspension"),
@@ -14,14 +15,6 @@
 
   let fitments = [];
 
-  function uniqueSorted(values, numeric) {
-    const set = [...new Set(values.filter((v) => v !== undefined && v !== null && v !== ""))];
-    if (numeric) {
-      return set.sort((a, b) => Number(a) - Number(b));
-    }
-    return set.sort((a, b) => String(a).localeCompare(String(b), undefined, { sensitivity: "base" }));
-  }
-
   function fillSelect(select, values, format) {
     const keep = select.querySelector('option[value="all"]');
     select.innerHTML = "";
@@ -33,10 +26,10 @@
   }
 
   function populateFilters(rows) {
-    fillSelect(els.suspension, uniqueSorted(rows.map((r) => r.suspension)));
+    fillSelect(els.suspension, lib.uniqueSorted(rows.map((r) => r.suspension)));
     fillSelect(
       els.diameter,
-      uniqueSorted(
+      lib.uniqueSorted(
         rows.map((r) => r.wheelDiameterIn),
         true
       ),
@@ -44,13 +37,13 @@
     );
     fillSelect(
       els.width,
-      uniqueSorted(
+      lib.uniqueSorted(
         rows.map((r) => r.wheelWidthIn),
         true
       ),
       (v) => `${v}"`
     );
-    fillSelect(els.tyre, uniqueSorted(rows.map((r) => r.tyreSize)));
+    fillSelect(els.tyre, lib.uniqueSorted(rows.map((r) => r.tyreSize)));
   }
 
   function currentFilters() {
@@ -62,80 +55,40 @@
     };
   }
 
-  function matches(row, f) {
-    if (f.suspension !== "all" && String(row.suspension) !== f.suspension) return false;
-    if (f.diameter !== "all" && String(row.wheelDiameterIn) !== f.diameter) return false;
-    if (f.width !== "all" && String(row.wheelWidthIn) !== f.width) return false;
-    if (f.tyre !== "all" && String(row.tyreSize) !== f.tyre) return false;
-    return true;
-  }
-
-  function formatOffset(mm) {
-    if (mm === null || mm === undefined || mm === "") return "Unknown";
-    return `${mm} mm`;
-  }
-
-  function hubLabel(row) {
-    const status = (row.hubBoreStatus || "unknown").toLowerCase();
-    if (status === "unknown" || status === "unresolved" || row.hubBoreMm == null) {
-      return "Unknown / unresolved";
-    }
-    return `${row.hubBoreMm} mm`;
-  }
-
-  function confidenceClass(level) {
-    const key = String(level || "").toLowerCase();
-    if (key === "confirmed") return "badge-confirmed";
-    if (key === "reported") return "badge-reported";
-    return "badge-unverified";
-  }
-
   function cardHtml(row) {
     const title = `${row.wheelDiameterIn}×${row.wheelWidthIn} · ${row.tyreSize}`;
     const hubUnknown =
-      !row.hubBoreMm ||
+      row.hubBoreMm == null ||
       ["unknown", "unresolved"].includes(String(row.hubBoreStatus || "unknown").toLowerCase());
     return `
       <article class="card">
-        <h3 class="card-title">${escapeHtml(title)}</h3>
+        <h3 class="card-title">${lib.escapeHtml(title)}</h3>
         <dl class="card-grid">
-          <div><dt>Suspension</dt><dd>${escapeHtml(row.suspension || "—")}</dd></div>
-          <div><dt>Offset</dt><dd>${escapeHtml(formatOffset(row.offsetMm))}</dd></div>
-          <div><dt>Rubbing</dt><dd>${escapeHtml(row.rubbing || "unknown")}</dd></div>
-          <div><dt>Modifications</dt><dd>${escapeHtml(row.modifications || "unknown")}</dd></div>
+          <div><dt>Suspension</dt><dd>${lib.escapeHtml(row.suspension || "—")}</dd></div>
+          <div><dt>Offset</dt><dd>${lib.escapeHtml(lib.formatOffset(row.offsetMm))}</dd></div>
+          <div><dt>Rubbing</dt><dd>${lib.escapeHtml(row.rubbing || "unknown")}</dd></div>
+          <div><dt>Modifications</dt><dd>${lib.escapeHtml(row.modifications || "unknown")}</dd></div>
           <div>
             <dt>Hub / centre bore</dt>
             <dd>
-              ${escapeHtml(hubLabel(row))}
+              ${lib.escapeHtml(lib.hubLabel(row))}
               ${hubUnknown ? '<span class="badge badge-unknown">unknown</span>' : ""}
             </dd>
           </div>
           <div>
             <dt>Evidence</dt>
-            <dd><span class="badge ${confidenceClass(row.evidenceConfidence)}">${escapeHtml(
+            <dd><span class="badge ${lib.confidenceClass(row.evidenceConfidence)}">${lib.escapeHtml(
               row.evidenceConfidence || "Unverified"
             )}</span></dd>
           </div>
         </dl>
-        ${
-          row.notes
-            ? `<p class="notes">${escapeHtml(row.notes)}</p>`
-            : ""
-        }
+        ${row.notes ? `<p class="notes">${lib.escapeHtml(row.notes)}</p>` : ""}
       </article>
     `;
   }
 
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
   function render() {
-    const filtered = fitments.filter((row) => matches(row, currentFilters()));
+    const filtered = fitments.filter((row) => lib.matches(row, currentFilters()));
     els.count.textContent = `${filtered.length} result${filtered.length === 1 ? "" : "s"}`;
     els.list.innerHTML = filtered.map(cardHtml).join("");
     els.empty.hidden = filtered.length > 0;
@@ -153,7 +106,8 @@
       const res = await fetch(DATA_URL);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      fitments = Array.isArray(data.fitments) ? data.fitments : [];
+      // Public finder only: exclude scaffold / non-gated rows from filters + results.
+      fitments = lib.publicFitments(data.fitments);
       populateFilters(fitments);
       bindFilters();
       render();
