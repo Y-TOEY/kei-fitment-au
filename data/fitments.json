@@ -6,60 +6,10 @@
     "market": "AU"
   },
   "schemaNotes": {
-    "hubBore": "Always null until measured. hubBoreStatus must remain unknown/unresolved. Do not invent 54/54.1 until Jerome Confirms.",
-    "evidenceConfidence": ["Confirmed", "Reported", "Manufacturer specification", "Unverified"],
-    "publicResults": "Only fitments[] rows that pass isPublicFitment() appear in filters/results. scaffoldExamples are never loaded into the public finder.",
-    "scaffold": "scaffoldExamples are schema/UI fixtures only — not gated fitments."
+    "hub": "PCD and centre bore are independent. hubUnknownSummary is aggregate only and must not wipe known sibling values.",
+    "evidenceConfidence": ["Confirmed", "Reported", "Manufacturer spec", "Unverified"],
+    "publicResults": "fitments[] is empty until gated. UI screens use Example placeholders only."
   },
   "fitments": [],
-  "scaffoldExamples": [
-    {
-      "id": "scaffold-001",
-      "scaffold": true,
-      "visibility": "scaffold",
-      "suspension": "stock",
-      "wheelDiameterIn": 14,
-      "wheelWidthIn": 5.5,
-      "tyreSize": "185/65R14",
-      "offsetMm": null,
-      "rubbing": "unknown",
-      "modifications": "none documented",
-      "hubBoreMm": null,
-      "hubBoreStatus": "unknown",
-      "evidenceConfidence": "Unverified",
-      "notes": "SCAFFOLD only — not shown in public results."
-    },
-    {
-      "id": "scaffold-002",
-      "scaffold": true,
-      "visibility": "scaffold",
-      "suspension": "lifted",
-      "wheelDiameterIn": 15,
-      "wheelWidthIn": 6.0,
-      "tyreSize": "195/65R15",
-      "offsetMm": null,
-      "rubbing": "unknown",
-      "modifications": "unknown",
-      "hubBoreMm": null,
-      "hubBoreStatus": "unknown",
-      "evidenceConfidence": "Unverified",
-      "notes": "SCAFFOLD only — hub unresolved (issue #1 HOLD)."
-    },
-    {
-      "id": "scaffold-003",
-      "scaffold": true,
-      "visibility": "scaffold",
-      "suspension": "stock",
-      "wheelDiameterIn": 13,
-      "wheelWidthIn": 5.0,
-      "tyreSize": "165/70R13",
-      "offsetMm": null,
-      "rubbing": "unknown",
-      "modifications": "none documented",
-      "hubBoreMm": null,
-      "hubBoreStatus": "unknown",
-      "evidenceConfidence": "Unverified",
-      "notes": "SCAFFOLD only — filter demo fixture."
-    }
-  ]
+  "scaffoldExamples": []
 }
