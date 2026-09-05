@@ -1,0 +1,15 @@
+{
+  "vehicle": {
+    "make": "Suzuki",
+    "model": "Carry / Super Carry",
+    "platform": "DA16T",
+    "market": "AU"
+  },
+  "schemaNotes": {
+    "hub": "PCD and centre bore are independent. hubUnknownSummary is aggregate only and must not wipe known sibling values.",
+    "evidenceConfidence": ["Confirmed", "Reported", "Manufacturer spec", "Unverified"],
+    "publicResults": "fitments[] is empty until gated. UI screens use Example placeholders only."
+  },
+  "fitments": [],
+  "scaffoldExamples": []
+}
