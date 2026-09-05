@@ -64,8 +64,8 @@
       evidenceConfidence: "Reported",
       wheelModel: "Enkei RPF1 · Example",
       pcd: "4×100",
-      hubBoreMm: 54,
-      hubBoreStatus: "known",
+      hubBoreMm: null,
+      hubBoreStatus: "unknown",
       ownerReports: 5,
       photos: 4,
     },
@@ -84,8 +84,8 @@
       evidenceConfidence: "Unverified",
       wheelModel: "Work Equip 01 · Example",
       pcd: "4×100",
-      hubBoreMm: 54,
-      hubBoreStatus: "known",
+      hubBoreMm: null,
+      hubBoreStatus: "unknown",
       ownerReports: 1,
       photos: 0,
     },
@@ -358,12 +358,9 @@
       els.empty.hidden = false;
     }
 
-    var exampleFiltered = sortRows(
-      EXAMPLE_ROWS.filter(function (row) {
-        return matchesExtended(row, f);
-      }),
-      mode
-    );
+    // Example / Demo gallery stays unfiltered so all demo card/evidence states
+    // remain visible on initial load (Stock rail filter must not hide Lowered/etc.).
+    var exampleFiltered = sortRows(EXAMPLE_ROWS.slice(), mode);
     els.exampleList.innerHTML = exampleFiltered
       .map(function (row) {
         return cardHtml(row, true);
