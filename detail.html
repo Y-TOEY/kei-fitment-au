@@ -1,1 +1,444 @@
-LOAD_FROM_DISK
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>KeiFit AU — Detail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #1C1F24;
+      --bg-2: #252A31;
+      --card: #F4F1EA;
+      --card-2: #F7F5F0;
+      --ink: #1C1F24;
+      --orange: #F5A623;
+      --orange-dim: #C4841A;
+      --steel: #A8AEB6;
+      --warm-grey: #3A3F47;
+      --line: #3A3F47;
+      --off-white: #F7F5F0;
+      --muted: #5A6068;
+      --pass: #3D9A5F;
+      --hold: #D4A017;
+      --fail: #C44B3C;
+      --candidate: #6B8CAE;
+      --hub: #9A7B4F;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --sans: "IBM Plex Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #0E1013;
+      font-family: var(--sans);
+      color: var(--off-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    .phone {
+      width: 100%;
+      max-width: 390px;
+      min-height: 844px;
+      margin: 0 auto;
+      background: var(--bg);
+      padding: 14px 16px 24px;
+      position: relative;
+    }
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+      padding: 0 2px;
+    }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    a.back { text-decoration: none; color: inherit; }
+    .back {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--warm-grey);
+      padding: 6px 10px;
+      border-radius: 2px;
+    }
+    .screen-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-white);
+    }
+    .example-banner {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(245,166,35,0.12);
+      color: var(--orange);
+      border: 1px dashed var(--orange-dim);
+      border-radius: 3px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .hero {
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 14px 14px 12px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--candidate);
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .wheel-size {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .tyre {
+      font-size: 15px;
+      color: #4A4F56;
+      margin-top: 6px;
+    }
+    .vehicle-line {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+      letter-spacing: 0.04em;
+    }
+    .state-chip {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 8px;
+      white-space: nowrap;
+      border-radius: 2px;
+      background: var(--candidate);
+      color: #fff;
+    }
+    .panel {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .panel-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--steel);
+      margin-bottom: 10px;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+    }
+    .spec dt {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--steel);
+      margin-bottom: 4px;
+    }
+    .spec dd {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--off-white);
+    }
+    .spec dd.example-tag::after {
+      content: " · Example";
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--steel);
+    }
+    .hub-panel {
+      background: rgba(154,123,79,0.12);
+      border: 1px solid var(--hub);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .hub-panel .panel-label {
+      color: var(--hub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hub-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--hub);
+      padding: 4px 8px;
+      border-radius: 2px;
+    }
+    .hub-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--off-white);
+      margin-bottom: 6px;
+    }
+    .hub-copy {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #C4B8A8;
+    }
+    .hub-fields {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .hub-fields .box {
+      background: rgba(0,0,0,0.25);
+      border-radius: 3px;
+      padding: 10px 12px;
+    }
+    .hub-fields dt {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--steel);
+      margin-bottom: 4px;
+    }
+    .hub-fields dd {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .hub-fields dd.known { color: var(--off-white); }
+    .hub-fields dd.unresolved { color: var(--hub); }
+    .hub-fields .box.known-box { border: 1px solid rgba(247,245,240,0.18); }
+    .hub-fields .box.unknown-box { border: 1px solid var(--hub); }
+    .evidence-panel {
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .evidence-panel .panel-label {
+      color: var(--muted);
+    }
+    .evidence-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px dashed #5A6068;
+      color: #5A6068;
+      border-radius: 2px;
+      background: transparent;
+    }
+    .evidence-copy {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #2A2F36;
+    }
+    .source-note {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #DDD8CE;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .caution {
+      background: rgba(245,166,35,0.1);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 4px 4px 0;
+      padding: 12px 12px 12px 14px;
+      margin-bottom: 12px;
+    }
+    .caution .label {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .caution p {
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--off-white);
+    }
+    .cta {
+      display: block;
+      width: 100%;
+      background: var(--orange);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 15px;
+      border: none;
+      border-radius: 3px;
+      border-bottom: 3px solid var(--orange-dim);
+      cursor: pointer;
+    }
+    .cta-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      text-align: center;
+      margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar"><span>9:41</span><span>KEIFIT · AU</span><span>100%</span></div>
+
+    <div class="top-nav">
+      <a class="back" href="results.html">‹ Results</a>
+      <h1 class="screen-title">Fitment detail</h1>
+    </div>
+
+    <div class="example-banner">⚠ Example data only — not a confirmed claim</div>
+
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="wheel-size">14×5.0 ET +40</div>
+          <div class="tyre">155/65R14 · Example</div>
+        </div>
+        <span class="state-chip">Candidate</span>
+      </div>
+      <div class="vehicle-line">Suzuki Carry DA16T · Stock suspension · Example</div>
+    </div>
+
+    <section class="panel">
+      <div class="panel-label">Wheel &amp; tyre · Example</div>
+      <dl class="spec-grid spec">
+        <div>
+          <dt>Diameter / width</dt>
+          <dd class="example-tag">14 × 5.0</dd>
+        </div>
+        <div>
+          <dt>Offset</dt>
+          <dd class="example-tag">ET +40</dd>
+        </div>
+        <div>
+          <dt>Tyre</dt>
+          <dd class="example-tag">155/65R14</dd>
+        </div>
+        <div>
+          <dt>Load / speed</dt>
+          <dd class="example-tag">Not stated</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="panel">
+      <div class="panel-label">Clearance &amp; mods · Example</div>
+      <dl class="spec-grid spec">
+        <div>
+          <dt>Clearance</dt>
+          <dd>Incomplete</dd>
+        </div>
+        <div>
+          <dt>Rubbing</dt>
+          <dd>Incomplete</dd>
+        </div>
+        <div>
+          <dt>Mods required</dt>
+          <dd>—</dd>
+        </div>
+        <div>
+          <dt>Ride height</dt>
+          <dd>Stock (UI)</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="hub-panel">
+      <div class="panel-label">
+        Hub
+        <span class="hub-badge">Hub unknown</span>
+      </div>
+      <div class="hub-title">Hub fitment not verified</div>
+      <p class="hub-copy">PCD and centre bore are tracked independently. Known values stay visible. Hub unknown is a summary only — overall hub fitment cannot be verified while any critical field is unresolved.</p>
+      <dl class="hub-fields">
+        <div class="box known-box">
+          <dt>PCD</dt>
+          <dd class="known">4×100 · Example</dd>
+        </div>
+        <div class="box unknown-box">
+          <dt>Centre bore</dt>
+          <dd class="unresolved">Unresolved</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="evidence-panel">
+      <div class="panel-label">Evidence confidence</div>
+      <div class="evidence-row">
+        <span class="badge">Unverified</span>
+        <span style="font-family:var(--mono);font-size:12px;color:#5A6068;">Candidate · incomplete</span>
+      </div>
+      <p class="evidence-copy">No Confirmed, Reported, or Manufacturer spec field measurement is attached. Treat as a lead for further checks only.</p>
+      <div class="source-note">Source note (Example): Community listing stub — KF-EX-CAND-004. Not Manufacturer spec.</div>
+    </section>
+
+    <div class="caution">
+      <div class="label">Related caution</div>
+      <p>Hub unknown means overall hub fitment is not verified. Centre bore is unresolved here — do not treat the known Example PCD as a complete bolt-pattern confirmation.</p>
+    </div>
+
+    <button class="cta" type="button">Log a correction</button>
+    <p class="cta-sub">Help resolve centre bore · Example flow only</p>
+  </div>
+</body>
+</html>
