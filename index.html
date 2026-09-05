@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KeiFit AU — DA16T Fitment Finder</title>
+  <meta name="description" content="Suzuki Carry DA16T wheel and tyre fitment finder for Australia. Filter by suspension, diameter, width, and tyre size." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="brand">KeiFit AU</p>
+      <h1>DA16T Fitment Finder</h1>
+      <p class="tagline">Suzuki Carry / Every DA16T — wheel &amp; tyre fitment lookup</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="filters" aria-label="Fitment filters">
+      <h2 class="visually-hidden">Filters</h2>
+
+      <label class="filter-field">
+        <span>Suspension</span>
+        <select id="filter-suspension" name="suspension">
+          <option value="all">All</option>
+        </select>
+      </label>
+
+      <label class="filter-field">
+        <span>Wheel diameter</span>
+        <select id="filter-diameter" name="diameter">
+          <option value="all">All</option>
+        </select>
+      </label>
+
+      <label class="filter-field">
+        <span>Wheel width</span>
+        <select id="filter-width" name="width">
+          <option value="all">All</option>
+        </select>
+      </label>
+
+      <label class="filter-field">
+        <span>Tyre size</span>
+        <select id="filter-tyre" name="tyre">
+          <option value="all">All</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="results" aria-live="polite">
+      <div class="results-meta">
+        <h2>Results</h2>
+        <p id="results-count" class="results-count"></p>
+      </div>
+      <div id="results-list" class="results-list"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <p>No fitments match these filters.</p>
+        <p class="empty-hint">Try selecting All on one or more filters, or check back as more data is added.</p>
+      </div>
+      <div id="load-error" class="load-error" hidden>
+        <p>Could not load fitment data. Check that <code>data/fitments.json</code> is available.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Hub / centre bore is shown as unknown until measured — never assume a value.</p>
+      <p class="disclaimer">Scaffold / Unverified rows are examples only and are not confirmed fitments.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
