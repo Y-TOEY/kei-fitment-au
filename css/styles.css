@@ -9,6 +9,7 @@
   --border: #2e3d4f;
   --warn: #e6b84d;
   --ok: #5cb87a;
+  --mfr: #c9a0ff;
   --radius: 12px;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -190,6 +191,11 @@ body {
 
 .badge-confirmed {
   color: var(--ok);
+}
+
+.badge-manufacturer {
+  color: var(--mfr);
+  border-color: #5a3d7a;
 }
 
 .badge-unknown {
