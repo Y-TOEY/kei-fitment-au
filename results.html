@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>KeiFit AU — Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #1C1F24;
+      --bg-2: #252A31;
+      --card: #F4F1EA;
+      --card-2: #F7F5F0;
+      --card-foot: #E8E4DC;
+      --ink: #1C1F24;
+      --orange: #F5A623;
+      --orange-dim: #C4841A;
+      --steel: #A8AEB6;
+      --warm-grey: #3A3F47;
+      --line: #3A3F47;
+      --off-white: #F7F5F0;
+      --muted: #5A6068;
+      --pass: #3D9A5F;
+      --hold: #D4A017;
+      --fail: #C44B3C;
+      --candidate: #6B8CAE;
+      --hub: #9A7B4F;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --sans: "IBM Plex Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #0E1013;
+      font-family: var(--sans);
+      color: var(--off-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      margin: 0 auto;
+      background: var(--bg);
+      padding: 14px 16px 22px;
+      position: relative;
+    }
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      padding: 0 2px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      padding: 0 2px;
+    }
+    .wordmark {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--off-white);
+    }
+    .header-meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      letter-spacing: 0.06em;
+    }
+    .crumb {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+      padding: 0 2px;
+    }
+    .crumb .on { color: var(--off-white); font-weight: 600; }
+    .vehicle-chip {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vehicle-chip .label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .vehicle-chip .name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--off-white);
+    }
+    .vehicle-chip a.edit { text-decoration: none; color: inherit; }
+    .edit {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      border: 1px solid var(--warm-grey);
+      padding: 6px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 2px;
+    }
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .filter-pill {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 7px 10px;
+      background: var(--bg-2);
+      border: 1px solid var(--warm-grey);
+      color: var(--steel);
+      letter-spacing: 0.04em;
+      border-radius: 3px;
+    }
+    .filter-pill.active {
+      border-color: var(--off-white);
+      color: var(--off-white);
+    }
+    .example-banner {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(245,166,35,0.12);
+      color: var(--orange);
+      border: 1px dashed var(--orange-dim);
+      border-radius: 3px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      text-align: center;
+      line-height: 1.35;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .section-head h2 {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steel);
+      font-weight: 600;
+    }
+    .section-head .note {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+    }
+    .cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .card {
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 4px;
+      overflow: hidden;
+      border-left: 4px solid var(--pass);
+    }
+    .card.hold { border-left-color: var(--hold); }
+    .card.fail { border-left-color: var(--fail); }
+    .card.candidate { border-left-color: var(--candidate); }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 12px 12px 6px;
+      gap: 10px;
+    }
+    .wheel-size {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+    .tyre {
+      font-size: 13px;
+      color: #4A4F56;
+      margin-top: 4px;
+    }
+    .state-chip {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 8px;
+      white-space: nowrap;
+      border-radius: 2px;
+    }
+    .state-chip.pass { background: var(--pass); color: #fff; }
+    .state-chip.hold { background: var(--hold); color: #1C1F24; }
+    .state-chip.fail { background: var(--fail); color: #fff; }
+    .state-chip.candidate { background: var(--candidate); color: #fff; }
+    .meta {
+      padding: 0 12px 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      font-size: 13px;
+    }
+    .meta dt {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .meta dd { font-weight: 600; font-size: 13px; }
+    .meta dd.unresolved { color: var(--hub); }
+    .card-foot {
+      background: var(--card-foot);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid #1C1F24;
+      background: transparent;
+      border-radius: 2px;
+    }
+    .badge.confirmed { background: #1C1F24; color: var(--off-white); border-color: #1C1F24; }
+    .badge.reported { background: transparent; color: #1C1F24; }
+    .badge.mfr { background: transparent; color: #1C1F24; border-style: solid; }
+    .badge.unverified { border-style: dashed; color: #5A6068; border-color: #5A6068; }
+    .ref {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .hub-flag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--hub);
+      background: rgba(154,123,79,0.18);
+      padding: 4px 8px;
+      border: 1px solid var(--hub);
+      border-radius: 2px;
+    }
+    .cta {
+      display: block;
+      width: 100%;
+      background: var(--orange);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 15px;
+      border: none;
+      border-radius: 3px;
+      border-bottom: 3px solid var(--orange-dim);
+      cursor: pointer;
+    }
+    .cta-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--steel);
+      text-align: center;
+      margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar"><span>9:41</span><span>KEIFIT · AU</span><span>100%</span></div>
+
+    <div class="header-row">
+      <div class="wordmark">KeiFit AU</div>
+      <div class="header-meta"><a href="index.html" style="color:inherit;text-decoration:none">Shop Floor</a></div>
+    </div>
+    <div class="crumb">Vehicle › Filters › <span class="on">Results</span></div>
+
+    <div class="vehicle-chip">
+      <div>
+        <div class="label">Selected vehicle</div>
+        <div class="name">Suzuki Carry DA16T</div>
+      </div>
+      <a class="edit" href="filters.html">Change</a>
+    </div>
+
+    <div class="filters">
+      <span class="filter-pill active">Stock</span>
+      <span class="filter-pill active">15″</span>
+      <span class="filter-pill">All evidence</span>
+    </div>
+
+    <div class="example-banner">⚠ Example data only — not real fitment claims</div>
+
+    <div class="section-head">
+      <h2>Documented results</h2>
+      <span class="note">4 entries · Example</span>
+    </div>
+
+    <div class="cards">
+      <article class="card pass">
+        <div class="card-top">
+          <div>
+            <div class="wheel-size">15×5.5 ET +35</div>
+            <div class="tyre">165/60R15 · Example</div>
+          </div>
+          <span class="state-chip pass">Pass</span>
+        </div>
+        <dl class="meta">
+          <div><dt>Clearance</dt><dd>Clear (Example)</dd></div>
+          <div><dt>Rubbing</dt><dd>None reported</dd></div>
+          <div><dt>PCD</dt><dd>4×100</dd></div>
+          <div><dt>Centre bore</dt><dd>CB54</dd></div>
+        </dl>
+        <div class="card-foot">
+          <span class="badge confirmed">Confirmed</span>
+          <span class="ref">Ex. ref KF-EX-014</span>
+        </div>
+      </article>
+
+      <article class="card hold">
+        <div class="card-top">
+          <div>
+            <div class="wheel-size">15×6.0 ET +28</div>
+            <div class="tyre">175/55R15 · Example</div>
+          </div>
+          <span class="state-chip hold">Hold</span>
+        </div>
+        <dl class="meta">
+          <div><dt>Clearance</dt><dd>Tight (Example)</dd></div>
+          <div><dt>Rubbing</dt><dd>Inner arch @ lock</dd></div>
+          <div><dt>PCD</dt><dd>4×100</dd></div>
+          <div><dt>Centre bore</dt><dd>CB54</dd></div>
+        </dl>
+        <div class="card-foot">
+          <span class="badge reported">Reported</span>
+          <span class="ref">Ex. ref KF-EX-031</span>
+        </div>
+      </article>
+
+      <article class="card fail">
+        <div class="card-top">
+          <div>
+            <div class="wheel-size">16×6.5 ET +20</div>
+            <div class="tyre">195/45R16 · Example</div>
+          </div>
+          <span class="state-chip fail">Fail</span>
+        </div>
+        <dl class="meta">
+          <div><dt>Clearance</dt><dd>Insufficient (Example)</dd></div>
+          <div><dt>Rubbing</dt><dd>Strut &amp; guard</dd></div>
+          <div><dt>PCD</dt><dd>4×100</dd></div>
+          <div><dt>Centre bore</dt><dd>CB54</dd></div>
+        </dl>
+        <div class="card-foot">
+          <span class="badge unverified">Unverified</span>
+          <span class="ref">Ex. ref KF-EX-088</span>
+        </div>
+      </article>
+
+      <article class="card candidate">
+        <div class="card-top">
+          <div>
+            <div class="wheel-size">14×5.0 ET +40</div>
+            <div class="tyre">155/65R14 · Example</div>
+          </div>
+          <span class="state-chip candidate">Candidate</span>
+        </div>
+        <dl class="meta">
+          <div><dt>Clearance</dt><dd>Incomplete</dd></div>
+          <div><dt>Rubbing</dt><dd>Incomplete</dd></div>
+          <div><dt>PCD</dt><dd>4×100 · Example</dd></div>
+          <div><dt>Centre bore</dt><dd class="unresolved">Unresolved</dd></div>
+        </dl>
+        <div class="card-foot">
+          <span class="badge unverified">Unverified</span>
+          <span class="hub-flag">Hub unknown</span>
+        </div>
+      </article>
+    </div>
+
+    <button class="cta" type="button">Log a fitment report</button>
+    <p class="cta-sub">Workshop rule: label evidence. Never invent Confirmed.</p>
+  </div>
+<script>document.querySelectorAll("article.card").forEach((el)=>{el.style.cursor="pointer";el.addEventListener("click",()=>{location.href="detail.html";});});</script>
+</body>
+</html>
