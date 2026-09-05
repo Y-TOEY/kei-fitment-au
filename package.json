@@ -1,7 +1,7 @@
 {
-  "name": "keifit-au-da16t-mvp",
+  "name": "keifit-au-shop-floor",
   "private": true,
   "scripts": {
-    "test": "node --test tests/fitment-lib.test.js"
+    "test": "node --test tests/*.test.js"
   }
 }
