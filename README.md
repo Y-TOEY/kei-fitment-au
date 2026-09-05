@@ -27,3 +27,7 @@ Fitment claims should be labelled as one of:
 **Vehicle:** Suzuki Carry DA16T
 
 **Goal:** launch a useful zero/low-cost MVP before expanding to other kei platforms.
+
+## Homepage vs Shop Floor
+- **`index.html`** — website-first public homepage (Issue #8) with locked hero artwork and Fitment Finder entry panel. Styles: `css/home.css`. Behaviour: `js/home.js`.
+- **Shop Floor finder pages** — `filters.html`, `results.html`, `detail.html` remain the evidence-labelled deep-link experience (Issue #7). Homepage finder submits into `filters.html` with query params only; it does not invent fitment data.
