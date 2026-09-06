@@ -105,12 +105,8 @@
             </label>
             <label class="finder__field">
               <span class="finder__label">Model</span>
-              <select name="model" id="model">
-                <option value="">Model</option>
-                <option value="carry-da16t">Carry DA16T</option>
-                <option value="hijet">Hijet</option>
-                <option value="acty">Acty</option>
-                <option value="other">Other</option>
+              <select name="model" id="model" disabled aria-disabled="true">
+                <option value="">Select make first</option>
               </select>
             </label>
             <label class="finder__field">
@@ -165,6 +161,7 @@
     </div>
   </footer>
 
+  <script src="js/vehicle-catalog.js" defer></script>
   <script src="js/home.js" defer></script>
 </body>
 </html>
