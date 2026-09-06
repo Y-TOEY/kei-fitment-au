@@ -3,14 +3,18 @@
   async function boot() {
     try {
       var texts = await Promise.all(
-        [0, 1, 2].map(function (i) {
-          return fetch("./js/detail-part-" + i + ".b64").then(function (r) {
-            if (!r.ok) throw new Error("missing part " + i);
-            return r.text();
-          });
+        [0, 1, 2].map(async function (i) {
+          var pair = await Promise.all(
+            ["a", "b"].map(function (suf) {
+              return fetch("./js/detail-part-" + i + suf + ".b64").then(function (r) {
+                if (!r.ok) throw new Error("missing part " + i + suf);
+                return r.text();
+              });
+            })
+          );
+          return pair.join("");
         })
       );
-      // Install payload part scripts (populate __KEIFIT_DETAIL_PARTS)
       texts.forEach(function (t) {
         var s = document.createElement("script");
         s.text = atob(t.replace(/\s+/g, ""));
