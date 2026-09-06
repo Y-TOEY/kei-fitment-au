@@ -2,323 +2,190 @@
 <html lang="en-AU">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>KeiFit AU — Filters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KEIFIT — Fitment Filters</title>
+  <meta name="description" content="KEIFIT Fitment Finder filters. Choose suspension, wheel size, tyre size and evidence level before viewing results." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #1C1F24;
-      --bg-2: #252A31;
-      --card: #F4F1EA;
-      --card-2: #F7F5F0;
-      --ink: #1C1F24;
-      --orange: #F5A623;
-      --orange-dim: #C4841A;
-      --steel: #A8AEB6;
-      --warm-grey: #3A3F47;
-      --line: #3A3F47;
-      --off-white: #F7F5F0;
-      --muted: #A8AEB6;
-      --mono: "IBM Plex Mono", ui-monospace, monospace;
-      --sans: "IBM Plex Sans", system-ui, sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      background: #0E1013;
-      font-family: var(--sans);
-      color: var(--off-white);
-      -webkit-font-smoothing: antialiased;
-    }
-    .phone {
-      width: 100%;
-      max-width: 390px;
-      min-height: 844px;
-      margin: 0 auto;
-      background: var(--bg);
-      padding: 14px 18px 24px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--steel);
-      letter-spacing: 0.04em;
-      margin-bottom: 18px;
-      padding: 0 2px;
-    }
-    .top-nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    a.back { text-decoration: none; color: inherit; }
-    .back {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--steel);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1px solid var(--warm-grey);
-      padding: 6px 10px;
-      border-radius: 2px;
-    }
-    .screen-title {
-      font-family: var(--mono);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--off-white);
-    }
-    .crumb {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--steel);
-      letter-spacing: 0.04em;
-      margin-bottom: 22px;
-    }
-    .crumb .on { color: var(--off-white); font-weight: 600; }
-    .section {
-      margin-bottom: 22px;
-    }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--steel);
-      margin-bottom: 10px;
-    }
-    .vehicle-card {
-      background: var(--bg-2);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .vehicle-card .name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--off-white);
-    }
-    .vehicle-card .sub {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--steel);
-      margin-top: 4px;
-      letter-spacing: 0.04em;
-    }
-    .check {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--off-white);
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .option-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .option {
-      background: var(--bg-2);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-      color: var(--steel);
-    }
-    .option.selected {
-      border-color: var(--off-white);
-      color: var(--off-white);
-      background: #2A3038;
-    }
-    .option .radio {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid var(--warm-grey);
-      flex-shrink: 0;
-    }
-    .option.selected .radio {
-      border-color: var(--off-white);
-      background: var(--off-white);
-      box-shadow: inset 0 0 0 4px #2A3038;
-    }
-    .option .hint {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--steel);
-      margin-top: 3px;
-    }
-    .option.selected .hint { color: #C0C5CC; }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .chip {
-      font-family: var(--mono);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 10px 14px;
-      border-radius: 3px;
-      background: var(--bg-2);
-      border: 1px solid var(--line);
-      color: var(--steel);
-    }
-    .chip.selected {
-      border-color: var(--off-white);
-      color: var(--off-white);
-      background: #2A3038;
-    }
-    .field {
-      background: var(--bg-2);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .field .placeholder {
-      font-size: 15px;
-      color: var(--steel);
-    }
-    .field .optional {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .spacer { flex: 1; min-height: 12px; }
-    a.cta-primary, a.cta-secondary { text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
-    .cta-primary {
-      display: block;
-      width: 100%;
-      background: var(--orange);
-      color: var(--ink);
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 16px 18px;
-      border: none;
-      border-radius: 3px;
-      border-bottom: 3px solid var(--orange-dim);
-      cursor: pointer;
-      margin-top: 8px;
-    }
-    .cta-hint {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--steel);
-      text-align: center;
-      margin-top: 10px;
-      letter-spacing: 0.04em;
-    }
-  </style>
+  <link rel="stylesheet" href="css/results.css" />
+  <link rel="stylesheet" href="css/filters.css" />
 </head>
-<body>
-  <div class="phone">
-    <div class="status-bar"><span>9:41</span><span>KEIFIT · AU</span><span>100%</span></div>
+<body class="filters-page">
+  <a class="skip-link" href="#filters-main">Skip to filters</a>
 
-    <div class="top-nav">
-      <a class="back" href="index.html">‹ Back</a>
-      <h1 class="screen-title">Fitment finder</h1>
+  <header class="site-nav" role="banner">
+    <div class="site-nav__inner">
+      <a class="brand" href="index.html" aria-label="KEIFIT home">
+        <span class="brand__mark">KEI<span class="brand__fit">FIT</span></span>
+        <span class="brand__tag">FITMENT DONE RIGHT</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <a class="is-active" href="filters.html" aria-current="page">Fitment Finder</a>
+        <a href="pages/coming-soon.html?section=wheels">Wheels</a>
+        <a href="pages/coming-soon.html?section=tyres">Tyres</a>
+        <a href="pages/coming-soon.html?section=suspension">Suspension</a>
+        <a href="pages/coming-soon.html?section=accessories">Accessories</a>
+        <a href="pages/coming-soon.html?section=guides">Guides</a>
+      </nav>
+
+      <div class="site-nav__actions">
+        <button type="button" class="icon-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="icon-btn" id="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <p class="nav-slogan" aria-hidden="true">SMALL TRUCKS / BIG POSSIBILITIES</p>
+      </div>
     </div>
 
-    <div class="crumb">Vehicle › <span class="on">Filters</span> › Results</div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a class="is-active" href="filters.html">Fitment Finder</a>
+      <a href="pages/coming-soon.html?section=wheels">Wheels</a>
+      <a href="pages/coming-soon.html?section=tyres">Tyres</a>
+      <a href="pages/coming-soon.html?section=suspension">Suspension</a>
+      <a href="pages/coming-soon.html?section=accessories">Accessories</a>
+      <a href="pages/coming-soon.html?section=guides">Guides</a>
+    </div>
+  </header>
 
-    <section class="section">
-      <div class="section-label">Vehicle</div>
-      <div class="vehicle-card">
+  <main class="filters-shell" id="filters-main">
+    <div class="filters-shell__inner">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a><span class="breadcrumb__sep">›</span>
+        <a href="filters.html">Fitment Finder</a><span class="breadcrumb__sep">›</span>
+        <span>Filters</span>
+      </p>
+
+      <header class="page-head">
         <div>
-          <div class="name">Suzuki Carry DA16T</div>
-          <div class="sub">Selected · Example catalogue</div>
+          <h1 class="page-head__title">Refine your search</h1>
+          <p class="page-head__sub">Filters are UI only · Example data ahead · Workshop rule: never invent Confirmed.</p>
         </div>
-        <div class="check">✓</div>
-      </div>
-    </section>
+      </header>
 
-    <section class="section">
-      <div class="section-label">Suspension</div>
-      <div class="option-list">
-        <div class="option selected">
-          <div>
-            <div>Stock</div>
-            <div class="hint">Factory ride height · UI only</div>
+      <section class="vehicle-panel" aria-labelledby="vehicle-heading">
+        <div class="vehicle-panel__head">
+          <h2 id="vehicle-heading">Selected vehicle</h2>
+          <p class="vehicle-panel__hint" id="vehicle-summary">Choose make, model and year</p>
+        </div>
+        <form class="vehicle-panel__form" id="vehicle-form" action="#" method="get">
+          <input type="hidden" name="category" id="category-input" value="wheels" />
+          <label class="field">
+            <span class="field__label">Make</span>
+            <select name="make" id="make" aria-label="Make">
+              <option value="">Make</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Model</span>
+            <select name="model" id="model" disabled aria-disabled="true" aria-label="Model">
+              <option value="">Select make first</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Year</span>
+            <select name="year" id="year" aria-label="Year">
+              <option value="">Year</option>
+            </select>
+          </label>
+        </form>
+      </section>
+
+      <div class="filters-layout">
+        <section class="filter-panel" aria-labelledby="suspension-label">
+          <h2 class="filter-panel__label" id="suspension-label">Suspension</h2>
+          <div class="option-list" role="radiogroup" aria-labelledby="suspension-label" id="suspension-options">
+            <button type="button" class="option is-selected" role="radio" aria-checked="true" data-filter="suspension" data-value="Stock">
+              <span class="option__body">
+                <span class="option__title">Stock</span>
+                <span class="option__hint">Factory ride height · UI only</span>
+              </span>
+              <span class="option__radio" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-filter="suspension" data-value="Lifted">
+              <span class="option__body">
+                <span class="option__title">Lifted</span>
+                <span class="option__hint">Raised suspension · UI only</span>
+              </span>
+              <span class="option__radio" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-filter="suspension" data-value="Lowered">
+              <span class="option__body">
+                <span class="option__title">Lowered</span>
+                <span class="option__hint">Reduced ride height · UI only</span>
+              </span>
+              <span class="option__radio" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-filter="suspension" data-value="Unknown">
+              <span class="option__body">
+                <span class="option__title">Unknown</span>
+                <span class="option__hint">Not specified · UI only</span>
+              </span>
+              <span class="option__radio" aria-hidden="true"></span>
+            </button>
           </div>
-          <div class="radio"></div>
-        </div>
-        <div class="option">
-          <div>
-            <div>Lifted</div>
-            <div class="hint">Raised suspension · UI only</div>
+        </section>
+
+        <section class="filter-panel" aria-labelledby="wheel-label">
+          <h2 class="filter-panel__label" id="wheel-label">Wheel size</h2>
+          <div class="chips" role="group" aria-labelledby="wheel-label" id="wheel-chips">
+            <button type="button" class="chip" data-filter="wheel" data-value="13" aria-pressed="false">13″</button>
+            <button type="button" class="chip" data-filter="wheel" data-value="14" aria-pressed="false">14″</button>
+            <button type="button" class="chip is-selected" data-filter="wheel" data-value="15" aria-pressed="true">15″</button>
+            <button type="button" class="chip" data-filter="wheel" data-value="16" aria-pressed="false">16″</button>
+            <button type="button" class="chip" data-filter="wheel" data-value="any" aria-pressed="false">Any</button>
           </div>
-          <div class="radio"></div>
-        </div>
+        </section>
+
+        <section class="filter-panel" aria-labelledby="tyre-label">
+          <h2 class="filter-panel__label" id="tyre-label">Tyre size</h2>
+          <label class="tyre-field">
+            <span class="visually-hidden">Tyre size</span>
+            <input class="tyre-input" id="tyre-size" type="text" name="tyre" placeholder="e.g. 165/60R15" autocomplete="off" inputmode="text" />
+            <span class="tyre-field__optional">Optional</span>
+          </label>
+        </section>
+
+        <section class="filter-panel" aria-labelledby="evidence-label">
+          <h2 class="filter-panel__label" id="evidence-label">Evidence filter</h2>
+          <div class="chips chips--wrap" role="radiogroup" aria-labelledby="evidence-label" id="evidence-chips">
+            <button type="button" class="chip is-selected" role="radio" aria-checked="true" data-filter="evidence" data-value="all">All</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-filter="evidence" data-value="confirmed">Confirmed</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-filter="evidence" data-value="reported">Reported</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-filter="evidence" data-value="manufacturer">Manufacturer Spec</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-filter="evidence" data-value="unverified">Unverified</button>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="section-label">Wheel size</div>
-      <div class="chips">
-        <span class="chip">13″</span>
-        <span class="chip">14″</span>
-        <span class="chip selected">15″</span>
-        <span class="chip">16″</span>
-        <span class="chip">Any</span>
-      </div>
-    </section>
+      <aside class="cta-dock" aria-label="Continue">
+        <a class="cta-primary" id="continue-cta" href="results.html">Continue to Results</a>
+        <p class="cta-hint">Filters are UI only · Example data ahead</p>
+      </aside>
+    </div>
+  </main>
 
-    <section class="section">
-      <div class="section-label">Tyre size</div>
-      <div class="field">
-        <span class="placeholder">e.g. 165/60R15</span>
-        <span class="optional">Optional</span>
-      </div>
-    </section>
+  <footer class="micro-footer">
+    <div class="micro-footer__inner">
+      <p class="micro-footer__brand">KEI<span class="accent">FIT</span> · AU</p>
+      <p class="micro-footer__note">Evidence-labelled fitment · Workshop rule: never invent Confirmed.</p>
+      <p class="micro-footer__links">
+        <a href="filters.html">Fitment Finder</a>
+        <span aria-hidden="true">·</span>
+        <a href="index.html">Home</a>
+      </p>
+    </div>
+  </footer>
 
-    <section class="section">
-      <div class="section-label">Evidence filter</div>
-      <div class="chips">
-        <span class="chip selected">All</span>
-        <span class="chip">Confirmed</span>
-        <span class="chip">Reported</span>
-        <span class="chip">Manufacturer spec</span>
-        <span class="chip">Unverified</span>
-      </div>
-    </section>
-
-    <div class="spacer"></div>
-
-    <a class="cta-primary" href="results.html">Continue to results</a>
-    <p class="cta-hint">Filters are UI only · Example data ahead</p>
-  </div>
+  <script src="js/vehicle-catalog.js" defer></script>
+  <script src="js/filters.js" defer></script>
 </body>
 </html>
