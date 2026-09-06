@@ -1,0 +1,9 @@
+/* Issue #21 copy HOLD — tighten Results atmosphere note at 390/320 only */
+@media (max-width: 390px) {
+  .vehicle-band__atmosphere-note,
+  .atmosphere-note {
+    margin: 0 0 0.55rem;
+    font-size: 0.55rem;
+    line-height: 1.3;
+  }
+}
