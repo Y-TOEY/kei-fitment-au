@@ -1,1 +1,236 @@
-<PLACEHOLDER>
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KEIFIT — Fitment Results · Suzuki Carry DA16T</title>
+  <meta name="description" content="KEIFIT Fitment Results for Suzuki Carry DA16T. Evidence-labelled wheel and tyre fitments." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/results.css" />
+</head>
+<body class="results-page">
+  <a class="skip-link" href="#results-main">Skip to results</a>
+
+  <header class="site-nav" role="banner">
+    <div class="site-nav__inner">
+      <a class="brand" href="index.html" aria-label="KEIFIT home">
+        <span class="brand__mark">KEI<span class="brand__fit">FIT</span></span>
+        <span class="brand__tag">FITMENT DONE RIGHT</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <a class="is-active" href="filters.html" aria-current="page">Fitment Finder</a>
+        <a href="pages/coming-soon.html?section=wheels">Wheels</a>
+        <a href="pages/coming-soon.html?section=tyres">Tyres</a>
+        <a href="pages/coming-soon.html?section=suspension">Suspension</a>
+        <a href="pages/coming-soon.html?section=accessories">Accessories</a>
+        <a href="pages/coming-soon.html?section=guides">Guides</a>
+      </nav>
+
+      <div class="site-nav__actions">
+        <button type="button" class="icon-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="icon-btn" id="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <p class="nav-slogan" aria-hidden="true">SMALL TRUCKS / BIG POSSIBILITIES</p>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a class="is-active" href="filters.html">Fitment Finder</a>
+      <a href="pages/coming-soon.html?section=wheels">Wheels</a>
+      <a href="pages/coming-soon.html?section=tyres">Tyres</a>
+      <a href="pages/coming-soon.html?section=suspension">Suspension</a>
+      <a href="pages/coming-soon.html?section=accessories">Accessories</a>
+      <a href="pages/coming-soon.html?section=guides">Guides</a>
+    </div>
+  </header>
+
+  <section class="vehicle-band" aria-label="Selected vehicle">
+    <div class="vehicle-band__media" aria-hidden="true">
+      <picture>
+        <source type="image/webp" srcset="assets/results-atmosphere-rainy-garage.webp" />
+        <img class="vehicle-band__img" src="assets/results-atmosphere-rainy-garage.jpg" alt="" width="1672" height="941" decoding="async" />
+      </picture>
+      <div class="vehicle-band__veil"></div>
+    </div>
+    <div class="vehicle-band__inner">
+      <div>
+        <p class="breadcrumb">
+          <a href="index.html">Home</a><span class="breadcrumb__sep">›</span>
+          <a href="filters.html">Fitment Finder</a><span class="breadcrumb__sep">›</span>
+          <span>Suzuki Carry DA16T</span>
+        </p>
+        <h1 class="vehicle-band__title">Suzuki Carry DA16T</h1>
+        <p class="vehicle-band__meta">2013 – Present · 2WD / 4WD · 660cc</p>
+        <p class="atmosphere-note vehicle-band__atmosphere-note">Scene shown for atmosphere only. Fitment findings come from the evidence below.</p>
+        <a class="change-vehicle" href="filters.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 14h11l-1.5 4H7L4 14zm3-6h7l2 4H5l2-4z" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="8" cy="18.5" r="1.4" fill="currentColor"/>
+            <circle cx="15.5" cy="18.5" r="1.4" fill="currentColor"/>
+          </svg>
+          Change Vehicle
+        </a>
+      </div>
+      <p class="vehicle-band__script" aria-hidden="true">Small Trucks Big Possibilities<span></span></p>
+    </div>
+  </section>
+
+  <div class="filter-drawer-backdrop" id="filter-backdrop" hidden></div>
+
+  <div class="workspace">
+    <div class="mobile-filter-bar">
+      <button type="button" class="mobile-filter-toggle" id="mobile-filter-toggle" aria-expanded="false" aria-controls="filter-rail">
+        Filters
+      </button>
+    </div>
+
+    <aside class="filter-rail" id="filter-rail" aria-label="Fitment filters">
+      <div class="filter-rail__head">
+        <h2>Filters</h2>
+        <button type="button" class="filter-reset" id="filter-reset">Reset All</button>
+      </div>
+
+      <form id="filters-form" action="#" method="get">
+        <section class="filter-section" aria-labelledby="suspension-label">
+          <h3 class="filter-section__label" id="suspension-label">Suspension Setup</h3>
+          <label class="filter-check"><input type="checkbox" name="suspension" value="Stock" checked /> Stock <span class="filter-check__count" data-count-for="suspension:Stock">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="suspension" value="Lifted" /> Lifted <span class="filter-check__count" data-count-for="suspension:Lifted">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="suspension" value="Lowered" /> Lowered <span class="filter-check__count" data-count-for="suspension:Lowered">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="suspension" value="Unknown" /> Unknown <span class="filter-check__count" data-count-for="suspension:Unknown">0</span></label>
+        </section>
+
+        <section class="filter-section" aria-labelledby="wheel-label">
+          <h3 class="filter-section__label" id="wheel-label">Wheel Size (inches)</h3>
+          <select class="filter-select" id="filter-diameter" name="diameter" aria-label="Wheel size any">
+            <option value="all">Any</option>
+            <option value="12">12″</option>
+            <option value="13">13″</option>
+            <option value="14">14″</option>
+            <option value="15">15″</option>
+            <option value="16">16″</option>
+          </select>
+          <label class="filter-check"><input type="checkbox" name="diameterChip" value="12" /> 12″ <span class="filter-check__count" data-count-for="diameter:12">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="diameterChip" value="13" /> 13″ <span class="filter-check__count" data-count-for="diameter:13">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="diameterChip" value="14" /> 14″ <span class="filter-check__count" data-count-for="diameter:14">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="diameterChip" value="15" /> 15″ <span class="filter-check__count" data-count-for="diameter:15">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="diameterChip" value="16" /> 16″ <span class="filter-check__count" data-count-for="diameter:16">0</span></label>
+        </section>
+
+        <section class="filter-section" aria-labelledby="offset-label">
+          <h3 class="filter-section__label" id="offset-label">Offset (ET)</h3>
+          <select class="filter-select" id="filter-offset" name="offset" aria-label="Offset any">
+            <option value="all">Any</option>
+            <option value="-20-0">ET −20 to 0</option>
+            <option value="1-20">ET 1 to 20</option>
+            <option value="21-40">ET 21 to 40</option>
+            <option value="41+">ET 41+</option>
+          </select>
+          <label class="filter-check"><input type="checkbox" name="offsetChip" value="-20-0" /> ET −20 to 0</label>
+          <label class="filter-check"><input type="checkbox" name="offsetChip" value="1-20" /> ET 1 to 20</label>
+          <label class="filter-check"><input type="checkbox" name="offsetChip" value="21-40" /> ET 21 to 40</label>
+          <label class="filter-check"><input type="checkbox" name="offsetChip" value="41+" /> ET 41+</label>
+        </section>
+
+        <section class="filter-section" aria-labelledby="tyre-label">
+          <h3 class="filter-section__label" id="tyre-label">Tyre Size</h3>
+          <input class="filter-search" id="filter-tyre-search" type="search" placeholder="Search tyre size" autocomplete="off" />
+          <div class="tyre-pills" id="tyre-pills" role="group" aria-label="Quick tyre sizes">
+            <button type="button" class="tyre-pill" data-tyre="145/80R12">145/80R12</button>
+            <button type="button" class="tyre-pill" data-tyre="155/65R13">155/65R13</button>
+            <button type="button" class="tyre-pill" data-tyre="165/60R15">165/60R15</button>
+            <button type="button" class="tyre-pill" data-tyre="175/55R15">175/55R15</button>
+          </div>
+        </section>
+
+        <section class="filter-section" aria-labelledby="rubbing-label">
+          <h3 class="filter-section__label" id="rubbing-label">Rubbing / Modifications</h3>
+          <label class="filter-check"><input type="checkbox" name="rubbing" value="none" /> No rubbing <span class="filter-check__count" data-count-for="rubbing:none">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="rubbing" value="minor" /> Minor rubbing <span class="filter-check__count" data-count-for="rubbing:minor">0</span></label>
+          <label class="filter-check"><input type="checkbox" name="rubbing" value="mods" /> Requires modification <span class="filter-check__count" data-count-for="rubbing:mods">0</span></label>
+        </section>
+
+        <div class="filter-actions">
+          <button type="submit" class="filter-apply" id="filter-apply">Apply Filters</button>
+        </div>
+      </form>
+    </aside>
+
+    <main class="results-pane" id="results-main">
+      <div class="results-head">
+        <div>
+          <h2 id="results-count">0 Fitment Results</h2>
+          <p class="results-head__sub">Real-world data, manufacturer specs and community reports.</p>
+        </div>
+        <label class="sort-control">
+          Sort by
+          <select id="sort-by" aria-label="Sort results">
+            <option value="relevance">Relevance</option>
+            <option value="diameter-asc">Wheel size ↑</option>
+            <option value="diameter-desc">Wheel size ↓</option>
+            <option value="offset-asc">Offset ↑</option>
+            <option value="offset-desc">Offset ↓</option>
+            <option value="evidence">Evidence</option>
+          </select>
+        </label>
+      </div>
+
+      <p id="load-error" class="honest-empty" hidden>
+        Could not load fitment data. Check your connection and try again.
+      </p>
+
+      <div class="honest-empty" id="empty-state">
+        <h3>No gated public fitments yet</h3>
+        <p>
+          Public <code>fitments[]</code> is empty until evidence is gated. Counts and results below stay honest —
+          Example / Demo cards are labelled and do not enter the Confirmed pipeline.
+        </p>
+      </div>
+
+      <div id="results-list" class="cards" hidden></div>
+
+      <section id="example-section" aria-labelledby="example-heading">
+        <div class="example-banner">⚠ Example / Demo only — layout &amp; UI reference. Not real fitment claims.</div>
+        <h3 class="example-section__title" id="example-heading">Example / Demo cards</h3>
+        <div class="cards" id="example-list"></div>
+      </section>
+
+      <div class="results-foot">
+        <span id="results-range">Showing 0 public results</span>
+        <span>Workshop rule: never invent Confirmed.</span>
+      </div>
+
+      <aside class="guide-cta" aria-label="Fitment guide">
+        <p class="guide-cta__copy">Not sure which fitment is right? Check out our Suzuki Carry DA16T fitment guide.</p>
+        <a class="guide-cta__btn" href="pages/coming-soon.html?section=guides">View Fitment Guide →</a>
+        <p class="guide-cta__stamp">REAL VEHICLES <span>/</span> REAL FITMENTS <span>/</span> REAL PEOPLE</p>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="micro-footer">
+    <div class="micro-footer__inner">
+      <p class="micro-footer__brand">KEI<span class="accent">FIT</span> · AU</p>
+      <p class="micro-footer__note">Evidence-labelled fitment · Workshop rule: never invent Confirmed.</p>
+      <p class="micro-footer__links">
+        <a href="filters.html">Fitment Finder</a>
+        <span aria-hidden="true">·</span>
+        <a href="index.html">Home</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/fitment-lib.js" defer></script>
+  <script src="js/results.js" defer></script>
+</body>
+</html>
