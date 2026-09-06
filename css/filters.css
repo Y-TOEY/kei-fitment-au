@@ -1,3 +1,5 @@
+@import url("filters-atmosphere.css");
+
 /* KEIFIT filters page styles (Issue #15).
    Shell (site-nav, breadcrumb tokens, micro-footer) comes from css/results.css.
    This file is filters-page layout only — no phone frame. */
@@ -28,6 +30,9 @@ body.filters-page {
 
 .page-head {
   margin-bottom: 1.35rem;
+}
+.page-head--atmosphere {
+  margin-bottom: 1.15rem;
 }
 .page-head__title {
   margin: 0;

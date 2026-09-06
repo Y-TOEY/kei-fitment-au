@@ -964,3 +964,16 @@ a { color: inherit; }
     padding-bottom: calc(1.35rem + env(safe-area-inset-bottom, 0px));
   }
 }
+
+
+/* Issue #21 — Results atmosphere note (decorative; not evidence) */
+.vehicle-band__atmosphere-note {
+  margin: 0 0 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--steel);
+  max-width: 36rem;
+  line-height: 1.4;
+}
