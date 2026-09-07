@@ -1,5 +1,16 @@
-/* Issue #21 — Filters visual atmosphere (decorative only).
+/* Filters full-page atmosphere (decorative only).
    Imported from css/filters.css. Does not change fitment logic. */
+
+body.filters-page {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.64) 0%, rgba(8, 9, 11, 0.78) 45%, rgba(8, 9, 11, 0.90) 100%),
+    url("../assets/filters-atmosphere-blue-hour.webp");
+  background-position: center top, center top;
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
 
 .page-head--atmosphere {
   position: relative;
@@ -7,30 +18,14 @@
   border: 1px solid var(--line);
   border-radius: 4px;
   margin-bottom: 1.15rem;
-  /* Compact band — avoid material mobile header growth */
   min-height: 0;
-}
-
-.page-head__media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.page-head__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 45%;
-}
-
-.page-head__veil {
-  position: absolute;
-  inset: 0;
   background:
-    linear-gradient(90deg, rgba(8, 9, 11, 0.94) 0%, rgba(8, 9, 11, 0.78) 48%, rgba(8, 9, 11, 0.62) 100%),
-    linear-gradient(180deg, rgba(8, 9, 11, 0.35) 0%, rgba(8, 9, 11, 0.72) 100%);
+    linear-gradient(90deg, rgba(8, 9, 11, 0.88) 0%, rgba(8, 9, 11, 0.62) 48%, rgba(8, 9, 11, 0.40) 100%);
+}
+
+/* The page background now owns the image so it continues beneath every section. */
+.page-head__media {
+  display: none;
 }
 
 .page-head__content {
@@ -57,10 +52,21 @@
   opacity: 0.92;
 }
 
-/* Keep vehicle panel readable above atmosphere; no extra chrome height on mobile */
-.filters-page .vehicle-panel {
+/* Translucent working surfaces keep the data legible without killing the background. */
+.filters-page .vehicle-panel,
+.filters-page .filter-panel {
   position: relative;
   z-index: 1;
+  background-color: rgba(28, 31, 36, 0.90);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+@media (max-width: 768px) {
+  body.filters-page {
+    background-position: 48% top, 48% top;
+    background-attachment: scroll, scroll;
+  }
 }
 
 @media (max-width: 390px) {
