@@ -2,38 +2,56 @@
    Decorative only; does not change fitment evidence or logic. */
 
 body.results-page {
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(180deg, rgba(8, 9, 11, 0.68) 0%, rgba(8, 9, 11, 0.80) 42%, rgba(8, 9, 11, 0.90) 100%),
-    url("../assets/results-atmosphere-rainy-garage.webp");
-  background-position: center top, center top;
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed, fixed;
+  position: relative;
+  isolation: isolate;
+  background: var(--bg);
 }
 
-/* Let the same atmospheric image continue through the vehicle band instead of ending there. */
+/* One dedicated full-bleed image layer. No tiling, no repeated side strips. */
+body.results-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("../assets/results-atmosphere-rainy-garage.webp");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 112% auto;
+  background-color: var(--bg);
+}
+
+/* Readability veil kept separate from the image so crop behaviour stays predictable. */
+body.results-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(8, 9, 11, 0.56) 0%, rgba(8, 9, 11, 0.72) 44%, rgba(8, 9, 11, 0.86) 100%);
+}
+
+/* The page background owns the image so it continues through the vehicle band. */
 .results-page .vehicle-band__media {
   display: none;
 }
 
 .results-page .vehicle-band {
-  background:
-    linear-gradient(90deg, rgba(8, 9, 11, 0.90) 0%, rgba(8, 9, 11, 0.64) 44%, rgba(8, 9, 11, 0.38) 72%, rgba(8, 9, 11, 0.48) 100%);
+  background: linear-gradient(90deg, rgba(8, 9, 11, 0.86) 0%, rgba(8, 9, 11, 0.58) 44%, rgba(8, 9, 11, 0.30) 72%, rgba(8, 9, 11, 0.42) 100%);
 }
 
-/* Keep dense data surfaces readable while allowing the page atmosphere to remain visible around them. */
+/* Keep dense data surfaces readable while allowing atmosphere around them. */
 .results-page .filter-rail,
 .results-page .fitment-card {
-  background-color: rgba(28, 31, 36, 0.90);
+  background-color: rgba(28, 31, 36, 0.86);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
 }
 
 @media (max-width: 768px) {
-  body.results-page {
-    background-position: 58% top, 58% top;
-    background-attachment: scroll, scroll;
+  body.results-page::before {
+    background-position: 58% top;
+    background-size: auto 100%;
   }
 }
 
