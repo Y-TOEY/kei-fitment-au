@@ -1,4 +1,42 @@
-/* Issue #21 copy HOLD — tighten Results atmosphere note at 390/320 only */
+/* Full-page Results atmosphere + small-screen copy hold.
+   Decorative only; does not change fitment evidence or logic. */
+
+body.results-page {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.68) 0%, rgba(8, 9, 11, 0.80) 42%, rgba(8, 9, 11, 0.90) 100%),
+    url("../assets/results-atmosphere-rainy-garage.webp");
+  background-position: center top, center top;
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+/* Let the same atmospheric image continue through the vehicle band instead of ending there. */
+.results-page .vehicle-band__media {
+  display: none;
+}
+
+.results-page .vehicle-band {
+  background:
+    linear-gradient(90deg, rgba(8, 9, 11, 0.90) 0%, rgba(8, 9, 11, 0.64) 44%, rgba(8, 9, 11, 0.38) 72%, rgba(8, 9, 11, 0.48) 100%);
+}
+
+/* Keep dense data surfaces readable while allowing the page atmosphere to remain visible around them. */
+.results-page .filter-rail,
+.results-page .fitment-card {
+  background-color: rgba(28, 31, 36, 0.90);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+@media (max-width: 768px) {
+  body.results-page {
+    background-position: 58% top, 58% top;
+    background-attachment: scroll, scroll;
+  }
+}
+
 @media (max-width: 390px) {
   .vehicle-band__atmosphere-note,
   .atmosphere-note {
