@@ -37,13 +37,14 @@ body.results-page::after {
 }
 
 .results-page .vehicle-band {
-  background: linear-gradient(90deg, rgba(8, 9, 11, 0.86) 0%, rgba(8, 9, 11, 0.58) 44%, rgba(8, 9, 11, 0.30) 72%, rgba(8, 9, 11, 0.42) 100%);
+  background: linear-gradient(90deg, rgba(8, 9, 11, 0.84) 0%, rgba(8, 9, 11, 0.54) 44%, rgba(8, 9, 11, 0.28) 72%, rgba(8, 9, 11, 0.38) 100%);
 }
 
-/* Keep dense data surfaces readable while allowing atmosphere around them. */
+/* Slightly glassier data surfaces: enough transparency to reveal the scene,
+   while keeping evidence text and controls readable. */
 .results-page .filter-rail,
 .results-page .fitment-card {
-  background-color: rgba(28, 31, 36, 0.86);
+  background-color: rgba(28, 31, 36, 0.80);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
 }
