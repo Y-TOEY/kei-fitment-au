@@ -2,17 +2,38 @@
    Imported from css/filters.css. Does not change fitment logic. */
 
 body.filters-page {
-  /* !important is intentional here because this file is imported before the base
-     filters stylesheet, whose later `background: var(--bg)` shorthand would
-     otherwise wipe out the full-page image. */
-  background-color: var(--bg) !important;
-  background-image:
-    linear-gradient(180deg, rgba(8, 9, 11, 0.48) 0%, rgba(8, 9, 11, 0.62) 45%, rgba(8, 9, 11, 0.76) 100%),
-    url("../assets/filters-atmosphere-blue-hour.webp") !important;
-  background-position: center top, center top;
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed, fixed;
+  position: relative;
+  isolation: isolate;
+  background: var(--bg) !important;
+}
+
+/* One fixed, full-bleed background layer. Zoomed enough to crop out the
+   duplicated side sections visible in the source artwork. */
+body.filters-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-color: var(--bg);
+  background-image: url("../assets/filters-atmosphere-blue-hour.webp");
+  background-repeat: no-repeat;
+  background-position: center 42%;
+  background-size: 142% auto;
+}
+
+body.filters-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 9, 11, 0.50) 0%,
+    rgba(8, 9, 11, 0.64) 46%,
+    rgba(8, 9, 11, 0.82) 100%
+  );
 }
 
 .page-head--atmosphere {
@@ -22,11 +43,9 @@ body.filters-page {
   border-radius: 4px;
   margin-bottom: 1.15rem;
   min-height: 0;
-  background:
-    linear-gradient(90deg, rgba(8, 9, 11, 0.76) 0%, rgba(8, 9, 11, 0.50) 48%, rgba(8, 9, 11, 0.28) 100%);
+  background: linear-gradient(90deg, rgba(8, 9, 11, 0.80) 0%, rgba(8, 9, 11, 0.50) 52%, rgba(8, 9, 11, 0.30) 100%);
 }
 
-/* The page background now owns the image so it continues beneath every section. */
 .page-head__media {
   display: none;
 }
@@ -55,20 +74,19 @@ body.filters-page {
   opacity: 0.92;
 }
 
-/* Translucent working surfaces keep the data legible without killing the background. */
 .filters-page .vehicle-panel,
 .filters-page .filter-panel {
   position: relative;
   z-index: 1;
-  background-color: rgba(28, 31, 36, 0.84);
+  background-color: rgba(28, 31, 36, 0.86);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
 }
 
 @media (max-width: 768px) {
-  body.filters-page {
-    background-position: 48% top, 48% top;
-    background-attachment: scroll, scroll;
+  body.filters-page::before {
+    background-position: 50% 35%;
+    background-size: auto 118vh;
   }
 }
 
